@@ -6,7 +6,15 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         isConnected: false,
-        socketMessage: "",
+        socketMessage: null,
+    },
+    getters: {
+        isConnected(state) {
+            return state.isConnected;
+        },
+        getMessage(state) {
+            return state.socketMessage;
+        },
     },
     mutations: {
         SOCKET_CONNECT(state) {
@@ -21,5 +29,9 @@ export default new Vuex.Store({
             state.socketMessage = message;
         },
     },
-    actions: {},
+    actions: {
+        SOCKET_CONNECT: ({ commit }) => commit("SOCKET_CONNECT"),
+        SOCKET_DISCONNECTED: ({ commit }) => commit("SOCKET_DISCONNECTED"),
+        SOCKET_MESSAGECHANNEL: ({ commit }) => commit("SOCKET_MESSAGECHANNEL"),
+    },
 });

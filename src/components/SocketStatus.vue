@@ -7,15 +7,14 @@
 
 <script lang="ts">
     import { Component, Vue } from "vue-property-decorator";
+    import store from "@/store";
 
     Component({
         el: "socket-status",
     });
     export default class SocketStatus extends Vue {
-        private isConnected: boolean = false;
-
-        public getCssClass(): string {
-            return this.isConnected ? "connected" : "disconnected";
+        public static getCssClass(): string {
+            return store.state.isConnected ? "connected" : "disconnected";
         }
     }
 </script>
