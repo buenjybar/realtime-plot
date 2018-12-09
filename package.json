@@ -4,7 +4,9 @@
   "author": "buenjybar",
   "private": true,
   "scripts": {
+    "start": "npm run server && npm run serve",
     "serve": "vue-cli-service serve",
+    "server": "node ./server/server.js",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:e2e": "vue-cli-service test:e2e",
