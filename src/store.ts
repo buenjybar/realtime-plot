@@ -1,16 +1,25 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
+import Vue from "vue";
+import Vuex from "vuex";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
+    state: {
+        isConnected: false,
+        socketMessage: "",
+    },
+    mutations: {
+        SOCKET_CONNECT(state) {
+            state.isConnected = true;
+        },
 
-  },
-  mutations: {
+        SOCKET_DISCONNECTED(state) {
+            state.isConnected = false;
+        },
 
-  },
-  actions: {
-
-  },
+        SOCKET_MESSAGECHANNEL(state, message) {
+            state.socketMessage = message;
+        },
+    },
+    actions: {},
 });
