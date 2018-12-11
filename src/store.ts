@@ -17,6 +17,20 @@ export default new Vuex.Store({
         },
     },
     mutations: {
+        SEND_CONNECT(state) {
+            return state;
+        },
+        SEND_CONNECT_SUCCESS(state) {
+            state.isConnected = true;
+        },
+
+        SEND_DISCONNECT(state) {
+            return state;
+        },
+        SEND_DISCONNECT_SUCCESS(state) {
+            state.isConnected = false;
+        },
+
         SOCKET_CONNECT(state) {
             state.isConnected = true;
         },
@@ -30,6 +44,10 @@ export default new Vuex.Store({
         },
     },
     actions: {
+        SEND_CONNECT: ({ commit }) => commit("SEND_CONNECT"),
+        SEND_CONNECT_SUCCESS: ({ commit }) => commit("SEND_CONNECT_SUCCESS"),
+        SEND_DISCONNECT: ({ commit }) => commit("SEND_DISCONNECT"),
+        SEND_DISCONNECT_SUCCESS: ({ commit }) => commit("SEND_DISCONNECT_SUCCESS"),
         SOCKET_CONNECT: ({ commit }) => commit("SOCKET_CONNECT"),
         SOCKET_DISCONNECTED: ({ commit }) => commit("SOCKET_DISCONNECTED"),
         SOCKET_MESSAGECHANNEL: ({ commit }) => commit("SOCKET_MESSAGECHANNEL"),

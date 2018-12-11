@@ -14,6 +14,7 @@
     import { Component, Vue } from "vue-property-decorator";
     import TimelinePlot from "@/components/TimelinePlot.vue";
     import SocketStatus from "@/components/SocketStatus.vue";
+    import store from "../store";
 
     @Component({
         components: {
@@ -21,7 +22,31 @@
             SocketStatus,
         },
     })
-    export default class RealTime extends Vue {}
+    export default class RealTime extends Vue {
+
+        public $mount(elementOrSelector?: Element | string, hydrating?: boolean): this {
+            super.$mount(elementOrSelector, hydrating);
+
+            store.subscribe((mutation) => {
+                if (mutation.type === "SEND_DISCONNECT") {
+                    this.$socket.once("disconnect", () => {
+                        store.dispatch("SEND_DISCONNECT_SUCCESS");
+                    });
+                    this.$socket.disconnect();
+                    return;
+                }
+                if (mutation.type === "SEND_CONNECT") {
+                    this.$socket.once("connect", () => {
+                        store.dispatch("SEND_CONNECT_SUCCESS");
+                    });
+                    this.$socket.connect();
+                    return;
+                }
+            });
+
+            return this;
+        }
+    }
 </script>
 
 <style scoped lang="scss">

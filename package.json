@@ -15,12 +15,14 @@
   "dependencies": {
     "@types/socket.io": "^2.1.2",
     "express": "^4.15.2",
+    "rxjs": "^6.3.3",
     "socket.io": "^2.2.0",
     "socket.io-client": "^2.2.0",
     "vue": "^2.5.20",
     "vue-class-component": "^6.3.2",
     "vue-property-decorator": "^7.2.0",
     "vue-router": "^3.0.1",
+    "vue-rx": "^6.0.1",
     "vue-socket.io": "^3.0.4",
     "vue-socket.io-extended": "^3.2.0",
     "vuex": "^3.0.1"

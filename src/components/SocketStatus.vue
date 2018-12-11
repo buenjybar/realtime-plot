@@ -1,6 +1,7 @@
 <template>
     <div class="socket-status"
-         v-bind:class="getCssClass()">
+         v-bind:class="getCssClass()"
+         @click="onClick">
         <span> status </span>
     </div>
 </template>
@@ -17,6 +18,15 @@
         public getCssClass(): string {
             return store.state.isConnected ? "connected" : "disconnected";
         }
+
+        public onClick(event: Event) {
+            if (event != null) {
+                event.stopPropagation();
+            }
+            const action = store.state.isConnected ? "SEND_DISCONNECT" : "SEND_CONNECT";
+            store.dispatch(action);
+        }
+
     }
 </script>
 
@@ -24,12 +34,19 @@
     div.socket-status {
         margin: 12px;
 
+        border: solid 1px transparent;
+        border-radius: 10px;
+        background: transparent;
+        color: #656565;
+
         &.connected {
-            border-bottom: solid 1px lightgreen;
+            border-color: lightgreen;
+            background: lightgreen;
         }
 
         &.disconnected {
-            border-bottom: solid 1px lightcoral;
+            border-color: lightcoral;
+            background: lightcoral;
         }
     }
 </style>
