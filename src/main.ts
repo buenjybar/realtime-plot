@@ -15,6 +15,9 @@ Vue.use(VueRx);
 const SOCKET_URL = "http://localhost:3000";
 Vue.use(VueSocketIO, io(SOCKET_URL), { store });
 
+// debug all socketio connections into the browser console
+// localStorage.debug = '*';
+
 new Vue({
     router,
     store,

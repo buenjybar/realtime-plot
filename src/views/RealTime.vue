@@ -27,9 +27,11 @@
         public $mount(elementOrSelector?: Element | string, hydrating?: boolean): this {
             super.$mount(elementOrSelector, hydrating);
 
+            // listen to user connection / disconnection event
             store.subscribe((mutation) => {
                 if (mutation.type === "SEND_DISCONNECT") {
                     this.$socket.once("disconnect", () => {
+                        this.$socket.removeAllListeners();
                         store.dispatch("SEND_DISCONNECT_SUCCESS");
                     });
                     this.$socket.disconnect();
@@ -37,6 +39,7 @@
                 }
                 if (mutation.type === "SEND_CONNECT") {
                     this.$socket.once("connect", () => {
+                        this.listenToLiveStream();
                         store.dispatch("SEND_CONNECT_SUCCESS");
                     });
                     this.$socket.connect();
@@ -44,7 +47,25 @@
                 }
             });
 
+            // log updates
+            this.listenToLiveStream();
+
             return this;
+        }
+
+        private listenToLiveStream() {
+            // join the channel room
+            const room = "live_stream";
+
+            this.$socket.on(room, (a) => {
+                console.log("data_received", a);
+            });
+
+            // this.$socket.on("broadcast", (a) => {
+            //     console.log("broadcast_received", a);
+            // });
+
+            this.$socket.emit("join", room);
         }
     }
 </script>
