@@ -5,9 +5,12 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from "vue-property-decorator";
+    import { Vue } from "vue-property-decorator";
+    import Component from "vue-class-component";
 
-    @Component
+    @Component({
+        el: "timeline-plot",
+    })
     export default class TimelinePlot extends Vue {
     }
 </script>

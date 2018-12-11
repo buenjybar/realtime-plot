@@ -6,14 +6,15 @@
 </template>
 
 <script lang="ts">
-    import { Component, Vue } from "vue-property-decorator";
+    import Component from "vue-class-component";
+    import Vue from "vue";
     import store from "@/store";
 
-    Component({
+    @Component({
         el: "socket-status",
-    });
+    })
     export default class SocketStatus extends Vue {
-        public static getCssClass(): string {
+        public getCssClass(): string {
             return store.state.isConnected ? "connected" : "disconnected";
         }
     }
